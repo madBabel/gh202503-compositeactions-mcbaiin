@@ -1,0 +1,17 @@
+name: Use composite actions to cache dependencies
+description: Use composite action to cache dependencies
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cache-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - uses: ./.github/actions/composite-cache-deps
+        with:
+          working-dir: 'packages/app'
